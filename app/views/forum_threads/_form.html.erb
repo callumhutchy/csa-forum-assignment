@@ -1,0 +1,37 @@
+<%= form_with(model: forum_thread, local: true) do |form| %>
+  <% if forum_thread.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(forum_thread.errors.count, "error") %> prohibited this forum_thread from being saved:</h2>
+
+      <ul>
+      <% forum_thread.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<br>
+  <div class="field" id="input">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :forum_thread_title %>
+  
+    <br>
+  
+    <%= form.label :body %>
+    <%= form.text_area :body, id: :forum_thread_body %>
+
+    <br>
+    <br>
+    <%= form.label "Post Anonymously?" %>
+    <%= form.check_box :anonymous,{id: :forum_thread_check} %>
+  <br><br>
+    <div class="actions" name="create" id="create">
+      <%= form.submit id: :create %>
+    </div>
+
+  </div>
+
+  
+
+  
+<% end %>

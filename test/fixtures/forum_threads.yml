@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  author: MyString
+  body: MyText
+  unread_posts: 1
+  total_posts: 1
+  post_time: 2017-12-01 20:00:41
+
+two:
+  title: MyString
+  author: MyString
+  body: MyText
+  unread_posts: 1
+  total_posts: 1
+  post_time: 2017-12-01 20:00:41

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @unread_post.title %>
+</p>
+
+<p>
+  <strong>Author:</strong>
+  <%= @unread_post.author %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @unread_post.content %>
+</p>
+
+<p>
+  <strong>Parent post:</strong>
+  <%= @unread_post.parent_post %>
+</p>
+
+<%= link_to 'Edit', edit_unread_post_path(@unread_post) %> |
+<%= link_to 'Back', unread_posts_path %>

@@ -1,0 +1,42 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :post_title, value: @post.title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :post_content %>
+  </div>
+<br>
+<%= form.label "Post Anonymously?" %>
+    <%= form.check_box :anonymous,{} %>
+    <br>
+    
+
+  <div style="display: none">
+ 
+     <%= form.text_area :forum_thread_id, id: :post_forum_thread_id, value: @post.forum_thread_id %>
+     <%= form.text_area :parent_post, id: :post_parent_post, value: @post.parent_post %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to 'Back', {:controller => 'forum_threads', :action => 'show', :id => @post.forum_thread_id } %>

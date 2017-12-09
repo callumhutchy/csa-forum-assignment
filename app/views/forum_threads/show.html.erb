@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<h1>
+  <%= @forum_thread.title %>
+</h1>
+<br>
+<p>
+  <%= 
+  if(@forum_thread.anonymous == 0)
+    link_to h(@users.where(id: @forum_thread.user_id).first.email) , {controller: 'users', action: 'show', id: @forum_thread.user_id}
+  else
+  "anonymous"
+  end
+  %>
+  <br>
+  <%= @forum_thread.post_time %>
+</p>
+<br>
+
+<h2>
+  
+  <%= @forum_thread.body %>
+  
+</h2>
+
+<br>
+<p>
+  <strong>Total replies:</strong>
+  <%= @forum_thread.total_posts %>
+</p>
+<br>
+
+<%= link_to 'Reply', {:controller => 'posts', :action => 'new', :forum_thread_id => @forum_thread.id, :forum_thread_title => @forum_thread.title} %>
+
+<br><br>
+  
+    <% 
+      def nesting_comments(posts, parent_id)
+        temp_posts = []
+        temp_posts.replace(posts)
+        @return_string = ""
+        temp_posts.each do |post|
+          if(post.parent_post == parent_id)
+            @return_string += "<strong> #{post.title} </strong><br> #{ 
+              if(post.anonymous == 0) 
+              link_to h(@users.where(id: post.user_id).first.email) , {controller: 'users', action: 'show', id: post.user_id} 
+              else "anonymous" 
+              end } 
+              <br> #{post.content} <br> <a href=\"/posts/new?forum_thread_id=#{@forum_thread.id}&parent_post=#{post.id}&forum_thread_title=#{@forum_thread.title}\">Reply</a><br> <br> <div class=\"indenting\"> "
+            temp_posts.delete(post)
+            @return_string += nesting_comments(temp_posts, post.id)
+            @return_string += "</div>"
+          end
+        end
+        @return_string
+      end    
+    %>
+
+  <%= nesting_comments(@posts, nil).html_safe %>
+
+
+<br>
+<%= link_to 'Back', forum_threads_path %>

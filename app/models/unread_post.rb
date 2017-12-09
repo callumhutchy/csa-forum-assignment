@@ -1,0 +1,2 @@
+class UnreadPost < ApplicationRecord
+end
